@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model.Interfaces;
 using Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProductReviewAPI.Controllers
 {
@@ -55,6 +56,8 @@ namespace ProductReviewAPI.Controllers
 
         }
 
+
+       
         [HttpGet("{id}/review")]
         public async Task<IActionResult> ReviewOfProduct(int id)
         {
@@ -72,31 +75,20 @@ namespace ProductReviewAPI.Controllers
 
         }
 
+        [Authorize]
+        [HttpPost("addReview")]
+        public async Task<IActionResult> AddReview([FromBody] AddReviewParam addReviewParam)
+        {
+            if (User.Identity.IsAuthenticated)
+                return Ok(addReviewParam.textReview);
+            else
+                return Forbid();
+        }
 
+    }
 
-        // GET: api/Product/5
-        [HttpGet("{id}", Name = "GetProduct")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        
-        // POST: api/Product
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-        
-        // PUT: api/Product/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+    public class AddReviewParam
+    {
+      public  string textReview { get; set; }
     }
 }

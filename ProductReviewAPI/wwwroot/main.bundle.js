@@ -22,6 +22,8 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_app_product_product_component__ = __webpack_require__("../../../../../src/app/product/product.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_app_customer_customer_component__ = __webpack_require__("../../../../../src/app/customer/customer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_app_review_review_component__ = __webpack_require__("../../../../../src/app/review/review.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_app_login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_app_logout_logout_component__ = __webpack_require__("../../../../../src/app/logout/logout.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -29,6 +31,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -46,6 +50,14 @@ var routes = [
     {
         path: 'customer',
         component: __WEBPACK_IMPORTED_MODULE_3_app_customer_customer_component__["a" /* CustomerComponent */]
+    },
+    {
+        path: 'login',
+        component: __WEBPACK_IMPORTED_MODULE_5_app_login_login_component__["a" /* LoginComponent */]
+    },
+    {
+        path: 'logout',
+        component: __WEBPACK_IMPORTED_MODULE_6_app_logout_logout_component__["a" /* LogoutComponent */]
     },
     { path: '', redirectTo: '/product', pathMatch: 'full' },
 ];
@@ -142,6 +154,9 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_app_product_product_service__ = __webpack_require__("../../../../../src/app/product/product.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_app_customer_customer_service__ = __webpack_require__("../../../../../src/app/customer/customer.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_app_review_reviews_service__ = __webpack_require__("../../../../../src/app/review/reviews.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_app_authentication_authentication_service__ = __webpack_require__("../../../../../src/app/authentication/authentication.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__logout_logout_component__ = __webpack_require__("../../../../../src/app/logout/logout.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -149,6 +164,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -178,7 +196,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_9__product_product_component__["a" /* ProductComponent */],
                 __WEBPACK_IMPORTED_MODULE_10__customer_customer_component__["a" /* CustomerComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__review_review_component__["a" /* ReviewComponent */],
-                __WEBPACK_IMPORTED_MODULE_12__category_category_component__["a" /* CategoryComponent */]
+                __WEBPACK_IMPORTED_MODULE_12__category_category_component__["a" /* CategoryComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__logout_logout_component__["a" /* LogoutComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -194,6 +214,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_14_app_product_product_service__["a" /* ProductService */],
                 __WEBPACK_IMPORTED_MODULE_15_app_customer_customer_service__["a" /* CustomerService */],
                 __WEBPACK_IMPORTED_MODULE_16_app_review_reviews_service__["a" /* ReviewsService */],
+                __WEBPACK_IMPORTED_MODULE_18_app_authentication_authentication_service__["a" /* AuthenticationService */],
                 { provide: 'ORIGIN_URL', useValue: location.origin }
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
@@ -203,6 +224,51 @@ var AppModule = (function () {
 }());
 
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/authentication/authentication.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AuthenticationService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AuthenticationService = (function () {
+    function AuthenticationService(http) {
+        this.http = http;
+    }
+    AuthenticationService.prototype.login = function (name, password) {
+        this.http.post("/token", { 'username': name, 'password': password }).subscribe(function (r) {
+            var data = r.json();
+            console.log(data.access_token);
+            console.log(data.username);
+            sessionStorage.setItem('accessToken', data.access_token);
+        });
+    };
+    AuthenticationService.prototype.logout = function () {
+        sessionStorage.removeItem('accessToken');
+    };
+    AuthenticationService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+    ], AuthenticationService);
+    return AuthenticationService;
+    var _a;
+}());
+
+//# sourceMappingURL=authentication.service.js.map
 
 /***/ }),
 
@@ -257,7 +323,7 @@ var CategoryComponent = (function () {
         this.categoryService = categoryService;
         this.overlayState = "inactive";
         this.selectedCategoryId = 1;
-        this.CategorySelected = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["h" /* EventEmitter */]();
+        this.CategorySelected = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
         this.categoryService.getCategorys().subscribe(function (result) { return _this.categoryMas = result; });
     }
     CategoryComponent.prototype.mouseOverCategory = function () {
@@ -271,7 +337,7 @@ var CategoryComponent = (function () {
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_2" /* Output */])(),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["h" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["h" /* EventEmitter */]) === "function" && _a || Object)
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _a || Object)
     ], CategoryComponent.prototype, "CategorySelected", void 0);
     CategoryComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
@@ -406,7 +472,7 @@ var CategoryService = (function () {
     };
     CategoryService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
-        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["e" /* Inject */])('ORIGIN_URL')),
+        __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["f" /* Inject */])('ORIGIN_URL')),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, String])
     ], CategoryService);
     return CategoryService;
@@ -530,6 +596,140 @@ var CustomerService = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/login/login.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<button (click)=\"login('x','12345')\">login</button>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/login/login.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/login/login.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_authentication_authentication_service__ = __webpack_require__("../../../../../src/app/authentication/authentication.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LoginComponent = (function () {
+    function LoginComponent(authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+    LoginComponent.prototype.ngOnInit = function () {
+    };
+    LoginComponent.prototype.login = function (name, password) {
+        this.authenticationService.login(name, password);
+    };
+    LoginComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+            selector: 'app-login',
+            template: __webpack_require__("../../../../../src/app/login/login.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/login/login.component.scss")]
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_authentication_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_authentication_authentication_service__["a" /* AuthenticationService */]) === "function" && _a || Object])
+    ], LoginComponent);
+    return LoginComponent;
+    var _a;
+}());
+
+//# sourceMappingURL=login.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/logout/logout.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  log out\n</p>\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/logout/logout.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/logout/logout.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_app_authentication_authentication_service__ = __webpack_require__("../../../../../src/app/authentication/authentication.service.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LogoutComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var LogoutComponent = (function () {
+    function LogoutComponent(authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+    LogoutComponent.prototype.ngOnInit = function () {
+        this.authenticationService.logout();
+    };
+    LogoutComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
+            selector: 'app-logout',
+            template: __webpack_require__("../../../../../src/app/logout/logout.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/logout/logout.component.scss")]
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_app_authentication_authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_app_authentication_authentication_service__["a" /* AuthenticationService */]) === "function" && _a || Object])
+    ], LogoutComponent);
+    return LogoutComponent;
+    var _a;
+}());
+
+//# sourceMappingURL=logout.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/menu/menu.component.html":
 /***/ (function(module, exports) {
 
@@ -578,7 +778,9 @@ var MenuComponent = (function () {
         this.menuItems = [
             { title: 'Products', path: 'product' },
             { title: 'New Reviews', path: 'review' },
-            { title: 'Customer', path: 'customer' }
+            { title: 'Customer', path: 'customer' },
+            { title: 'Login', path: 'login' },
+            { title: 'Logout', path: 'logout' }
         ];
         this.currentItem = this.menuItems[0].title;
     }
@@ -766,7 +968,7 @@ var ProductService = (function () {
 /***/ "../../../../../src/app/review/review.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div\n*ngFor=\"let review of reviews\">\n{{review.reviewDescription}}\n</div>\n<div *ngIf=\"!isReviewExsist\"> пока нет отзывов</div>"
+module.exports = "<div\n*ngFor=\"let review of reviews\">\n{{review.reviewDescription}}\n</div>\n<div *ngIf=\"!isReviewExsist\"> пока нет отзывов</div>\n<button (click)=\"addReview()\" >add review</button>"
 
 /***/ }),
 
@@ -826,6 +1028,9 @@ var ReviewComponent = (function () {
             });
         });
     };
+    ReviewComponent.prototype.addReview = function () {
+        this.reviewsService.addReview(1, "new review text....");
+    };
     ReviewComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
             selector: 'app-review',
@@ -848,6 +1053,7 @@ var ReviewComponent = (function () {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common_http__ = __webpack_require__("../../../common/@angular/common/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReviewsService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -860,9 +1066,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var ReviewsService = (function () {
-    function ReviewsService(http) {
+    function ReviewsService(http, http2) {
         this.http = http;
+        this.http2 = http2;
     }
     ReviewsService.prototype.reviewsUrl = function (id) {
         return "api/products/" + id + "/review";
@@ -873,12 +1082,23 @@ var ReviewsService = (function () {
             return res;
         });
     };
+    ReviewsService.prototype.addReview = function (productId, text) {
+        var token = sessionStorage.getItem('accessToken');
+        var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Headers */]();
+        headers.append("Authorization", "Bearer " + token);
+        this.http2.post("api/products/addReview", { 'textReview': text }, { 'headers': headers }).subscribe(function (r) {
+            alert(r);
+            console.log(r);
+        }, function (error) {
+            alert("no access" + error);
+        });
+    };
     ReviewsService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["c" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["b" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _b || Object])
     ], ReviewsService);
     return ReviewsService;
-    var _a;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=reviews.service.js.map
