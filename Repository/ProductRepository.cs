@@ -8,6 +8,8 @@ namespace Repository
     using System.Threading.Tasks;
     using Model;
     using Model.Interfaces;
+    using Microsoft.EntityFrameworkCore;
+
     public class ProductRepository : IProductRepository
     {
         DAL.ProductReviewContext context;
@@ -35,14 +37,48 @@ namespace Repository
                     ProductId = p.ProductId,
                     ProductName = p.ProductName,
                     ProductDescription = p.ProductDescription,
-                    CategoryId = p.CategoryId
-                });
+                    CategoryId = p.CategoryId,
+                    Reviews = p.Reviews.ToArray().Select<DAL.Review, Model.Review>(rw => new Model.Review()
+                    {
+                        CustomerId = rw.CustomerId,
+                        ProductId = rw.ProductId,
+                        Rate = rw.Rate,
+                        ReviewDescription = rw.ReviewDescription,
+                        ReviewId = rw.ReviewId
+                    })
+                }).AsQueryable();
+
             });
         }
 
-        public Task<Product> GetByIdAsync(int id)
+        public  Task<Product>  GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+
+            return Task<Product>.Factory.StartNew(() =>
+            {
+                var p = context.Products.First(p1 => p1.ProductId == id);
+                context.Reviews.Load();
+                var r = p.Reviews.ToArray().Select<DAL.Review, Model.Review>(rw => new Model.Review()
+                {
+                    CustomerId = rw.CustomerId,
+                    ProductId = rw.ProductId,
+                    Rate = rw.Rate,
+                    ReviewDescription = rw.ReviewDescription,
+                    ReviewId = rw.ReviewId
+                });
+
+
+                return new Model.Product()
+                {
+                    ProductId = p.ProductId,
+                    ProductName = p.ProductName,
+                    ProductDescription = p.ProductDescription,
+                    CategoryId = p.CategoryId,
+                    Reviews = r
+                };
+
+            });
+
         }
 
         public Task<bool> UpdateAsync(Product item)
@@ -54,14 +90,33 @@ namespace Repository
         {
             return Task<IQueryable<Product>>.Factory.StartNew(() =>
             {
-                return context.Products.Where(p=>p.CategoryId==categoryId).Select(p => new Model.Product
+                return context.Products.Where(p => p.CategoryId == categoryId).ToArray().Select(p => new Model.Product
                 {
                     ProductId = p.ProductId,
                     ProductName = p.ProductName,
                     ProductDescription = p.ProductDescription,
-                    CategoryId = p.CategoryId
+                    CategoryId = p.CategoryId,
+                    Reviews = p.Reviews.ToArray().Select<DAL.Review, Model.Review>(rw => new Model.Review()
+                    {
+                        CustomerId = rw.CustomerId,
+                        ProductId = rw.ProductId,
+                        Rate = rw.Rate,
+                        ReviewDescription = rw.ReviewDescription,
+                        ReviewId = rw.ReviewId
+                    })
+
                 }).AsQueryable();
             });
         }
-    }
 }
+}
+
+
+//return new Model.Review()
+//                        {
+//                            CustomerId = rw.CustomerId,
+//                            ProductId = rw.ProductId,
+//                            Rate = rw.Rate,
+//                            ReviewDescription = rw.ReviewDescription,
+//                            ReviewId = rw.ReviewId
+//                        };

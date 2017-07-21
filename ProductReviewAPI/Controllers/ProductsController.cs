@@ -43,7 +43,8 @@ namespace ProductReviewAPI.Controllers
         {
             try
             {
-                return Ok(await productRepository.GetProductByCategoryId(id));
+                var res = (await productRepository.GetProductByCategoryId(id)).ToArray();
+                return Ok(res);
             }
             catch (Exception)
             {
@@ -53,6 +54,25 @@ namespace ProductReviewAPI.Controllers
             return BadRequest();
 
         }
+
+        [HttpGet("{id}/review")]
+        public async Task<IActionResult> ReviewOfProduct(int id)
+        {
+            try
+            {
+                Product p = await productRepository.GetByIdAsync(id);
+                return Ok(p.Reviews);
+            }
+            catch (Exception)
+            {
+
+
+            }
+            return BadRequest();
+
+        }
+
+
 
         // GET: api/Product/5
         [HttpGet("{id}", Name = "GetProduct")]
